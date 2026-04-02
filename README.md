@@ -101,3 +101,47 @@ npx expo install react-native-safe-area-context
 ```terminal
 npx expo install @react-navigation/native @react-navigation/bottom-tabs react-native-screens
 ```
+
+### SVG 사용
+
+- 패키지 설정
+
+```terminal
+npx expo install react-native-svg
+npm install -D react-native-svg-transformer
+```
+
+- Metro 설정 변경 (metro.config.js)
+
+```javascript
+const { getDefaultConfig } = require("expo/metro-config");
+
+module.exports = (() => {
+  const config = getDefaultConfig(__dirname);
+
+  const { transformer, resolver } = config;
+
+  config.transformer = {
+    ...transformer,
+    babelTransformerPath: require.resolve("react-native-svg-transformer"),
+  };
+  config.resolver = {
+    ...resolver,
+    assetExts: resolver.assetExts.filter((ext) => ext !== "svg"),
+    sourceExts: [...resolver.sourceExts, "svg"],
+  };
+
+  return config;
+})();
+```
+
+- TypeScript 사용 시 주의사항 (선택) declarations.d.ts
+
+```typescript
+declare module "*.svg" {
+  import React from "react";
+  import { SvgProps } from "react-native-svg";
+  const content: React.FC<SvgProps>;
+  export default content;
+}
+```

@@ -1,8 +1,9 @@
 import { useAppTheme } from "@presentation/hooks/useAppTheme";
 import CssStack from "@presentation/navigation/CssStack";
 import { RootTabParamList } from "@presentation/navigation/types";
-import AxiosScreen from "@presentation/screens/AxiosScreen";
-import SettingsScreen from "@presentation/screens/SettingsScreen";
+import AxiosScreen from "@presentation/screens/axios/AxiosScreen";
+import NewsScreen from "@presentation/screens/news/NewsScreen";
+import SettingsScreen from "@presentation/screens/settings/SettingsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -19,6 +20,11 @@ export const TabNavigator = () => {
         headerTitleStyle: { color: theme.color.main },
       }}
     >
+      <Tab.Screen
+        name="News"
+        component={NewsScreen}
+        options={{ title: "News", headerShown: false }}
+      />
       <Tab.Screen
         name="CssStack"
         component={CssStack}

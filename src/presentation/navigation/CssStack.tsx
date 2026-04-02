@@ -8,7 +8,7 @@ import CSS06JustifyContentScreen from "@presentation/screens/css/CSS06JustifyCon
 import CSS07AlignItemsScreen from "@presentation/screens/css/CSS07AlignItemsScreen";
 import CSS08AlignSelfScreen from "@presentation/screens/css/CSS08AlignSelfScreen";
 import CSS09AlignContentScreen from "@presentation/screens/css/CSS09AlignContentScreen";
-import CssScreen from "@presentation/screens/CssScreen";
+import CssScreen from "@presentation/screens/css/CssScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator<CssStackParamList>();

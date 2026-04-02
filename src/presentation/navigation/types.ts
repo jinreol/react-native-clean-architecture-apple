@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type RootTabParamList = {
+  News: undefined;
   CssStack: undefined;
   Axios: undefined;
   Settings: undefined;

@@ -10,12 +10,12 @@ module.exports = function (api) {
           alias: {
             // "@": "./src",
             // 필요한 경로를 여기에 추가하세요.
-            "@assets/*": "./src/assets/*",
-            "@core/*": "./src/core/*",
+            "@assets/*": "./src/assets",
+            "@core/*": "./src/core",
             "@data": "./src/data",
             "@di": "./src/di",
             "@domain": "./src/domain",
-            "@presentation/*": "./src/presentation/*",
+            "@presentation/*": "./src/presentation",
           },
         },
       ],
