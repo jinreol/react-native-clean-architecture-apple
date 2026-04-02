@@ -1,0 +1,6 @@
+{
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
+
+  // optional (자동 import 더 적극적으로)
+  "js/ts.preferences.updateImportsOnFileMove.enabled": "always"
+}
