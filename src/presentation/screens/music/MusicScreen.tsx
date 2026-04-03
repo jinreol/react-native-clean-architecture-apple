@@ -78,11 +78,12 @@ const DATA: AlbumItem[] = [
 interface GridItemProps {
   item: AlbumItem;
   theme: Theme;
+  isDarkMode: Boolean;
   onPress: (item: AlbumItem) => void;
 }
 
-const GridItem = ({ item, theme, onPress }: GridItemProps) => {
-  const styles = getGridItemStyles(theme);
+const GridItem = ({ item, theme, isDarkMode, onPress }: GridItemProps) => {
+  const styles = getGridItemStyles(theme, isDarkMode);
   return (
     <TouchableOpacity
       activeOpacity={0.8} // 터치 시 투명도 조절 (0~1)
@@ -106,17 +107,22 @@ const GridItem = ({ item, theme, onPress }: GridItemProps) => {
 };
 
 const MusicScreen = ({ navigation }: MusicProp) => {
-  const { theme } = useAppTheme();
+  const { theme, isDarkMode } = useAppTheme();
   // 현재 기기의 안전 영역 인셋(Insets) 가져오기
   const insets = useSafeAreaInsets();
-  const styles = getMainStyles(theme, insets);
+  const styles = getMainStyles(theme, isDarkMode, insets);
 
   // 아이템 클릭 핸들러
   const handleItemPress = (item: AlbumItem) =>
     navigation.navigate("MusicList", { item });
 
   const renderItem: ListRenderItem<AlbumItem> = ({ item }) => (
-    <GridItem item={item} theme={theme} onPress={handleItemPress} />
+    <GridItem
+      item={item}
+      theme={theme}
+      isDarkMode={isDarkMode}
+      onPress={handleItemPress}
+    />
   );
 
   return (
@@ -152,7 +158,7 @@ export default MusicScreen;
 /**
  * 메인 화면 스타일 생성 함수
  */
-const getMainStyles = (theme: Theme, insets: EdgeInsets) =>
+const getMainStyles = (theme: Theme, isDarkMode: boolean, insets: EdgeInsets) =>
   StyleSheet.create({
     root: {
       flex: 1,
@@ -181,7 +187,7 @@ const getMainStyles = (theme: Theme, insets: EdgeInsets) =>
     searchBarContainer: {
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor: theme.color.background,
+      backgroundColor: isDarkMode ? theme.color.shade : theme.color.background,
       height: SEARCH_BAR_HEIGHT,
       borderRadius: 3,
       paddingHorizontal: 12,
@@ -200,11 +206,11 @@ const getMainStyles = (theme: Theme, insets: EdgeInsets) =>
     },
   });
 
-const getGridItemStyles = (theme: Theme) =>
+const getGridItemStyles = (theme: Theme, isDarkMode: boolean) =>
   StyleSheet.create({
     container: {
       width: ITEM_WIDTH,
-      backgroundColor: theme.color.background,
+      backgroundColor: isDarkMode ? theme.color.shade : theme.color.background,
       borderRadius: 4,
       // 그림자 (iOS)
       shadowColor: "#000",
