@@ -1,5 +1,6 @@
 import { useAppTheme } from "@presentation/hooks/useAppTheme";
 import CssStack from "@presentation/navigation/CssStack";
+import MusicStack from "@presentation/navigation/MusicStack";
 import { RootTabParamList } from "@presentation/navigation/types";
 import AxiosScreen from "@presentation/screens/axios/AxiosScreen";
 import NewsScreen from "@presentation/screens/news/NewsScreen";
@@ -24,6 +25,11 @@ export const TabNavigator = () => {
         name="News"
         component={NewsScreen}
         options={{ title: "News", headerShown: false }}
+      />
+      <Tab.Screen
+        name="MusicStack"
+        component={MusicStack}
+        options={{ title: "Music", headerShown: false }}
       />
       <Tab.Screen
         name="CssStack"

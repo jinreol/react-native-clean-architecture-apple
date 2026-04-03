@@ -1,7 +1,9 @@
+import { AlbumItem } from "@presentation/screens/music/MusicScreen";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type RootTabParamList = {
   News: undefined;
+  MusicStack: undefined;
   CssStack: undefined;
   Axios: undefined;
   Settings: undefined;
@@ -21,3 +23,10 @@ export type CssStackParamList = {
 };
 
 export type CssProp = NativeStackScreenProps<CssStackParamList, "Css">;
+
+export type MusicStackParamList = {
+  Music: undefined;
+  MusicList: { item: AlbumItem };
+};
+
+export type MusicProp = NativeStackScreenProps<MusicStackParamList, "Music">;

@@ -7,8 +7,6 @@ export const useAppTheme = () => {
   // 시스템 설정을 가져옴 (null 또는 undefined일 수 있음)
   const systemColorScheme = useColorScheme();
 
-  console.log(`systemColorScheme:${systemColorScheme}`);
-
   // null 또는 undefined인 경우 기본값으로 'light' 사용
   const colorScheme = systemColorScheme ?? "light";
 
