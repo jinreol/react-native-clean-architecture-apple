@@ -6,9 +6,9 @@ import NewsTitle from "@presentation/screens/news/components/NewsTitle";
 import { Theme } from "@core/theme/theme";
 
 const NewsScreen = () => {
-  const { theme } = useAppTheme();
+  const { theme, isDarkMode } = useAppTheme();
   // 테마를 인자로 전달하여 스타일 객체 생성
-  const styles = createStyles(theme);
+  const styles = createStyles(theme, isDarkMode);
 
   // 현재 기기의 안전 영역 인셋(Insets) 가져오기
   const insets = useSafeAreaInsets();
@@ -31,7 +31,12 @@ const NewsScreen = () => {
       renderItem={({ item }) => (
         <View style={styles.card}>
           <Text
-            style={[theme.typography.caption, { color: theme.color.primary }]}
+            style={[
+              theme.typography.caption,
+              {
+                color: isDarkMode ? theme.color.secondary : theme.color.primary,
+              },
+            ]}
           >
             {item.ago}
           </Text>
@@ -59,10 +64,10 @@ const NewsScreen = () => {
   );
 };
 
-const createStyles = (theme: Theme) =>
+const createStyles = (theme: Theme, isDarkMode: Boolean) =>
   StyleSheet.create({
     card: {
-      backgroundColor: theme.color.background,
+      backgroundColor: isDarkMode ? theme.color.shade : theme.color.background,
       borderRadius: 8,
       padding: 16,
       marginHorizontal: 8,
