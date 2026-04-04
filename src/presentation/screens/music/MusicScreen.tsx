@@ -1,6 +1,5 @@
 import { useAppTheme } from "@presentation/hooks/useAppTheme";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 import {
   View,
   Image,
@@ -11,7 +10,6 @@ import {
   ListRenderItem,
   TextInput,
   StyleSheet,
-  Alert,
   TouchableOpacity,
 } from "react-native";
 import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context";
@@ -78,7 +76,7 @@ const DATA: AlbumItem[] = [
 interface GridItemProps {
   item: AlbumItem;
   theme: Theme;
-  isDarkMode: Boolean;
+  isDarkMode: boolean;
   onPress: (item: AlbumItem) => void;
 }
 
@@ -90,7 +88,11 @@ const GridItem = ({ item, theme, isDarkMode, onPress }: GridItemProps) => {
       onPress={() => onPress(item)} // 클릭 시 아이템 정보 전달
       style={styles.container}
     >
-      <Image source={item.image} style={styles.image} resizeMode="cover" />
+      <Image
+        source={item.image}
+        style={{ width: ITEM_WIDTH, height: ITEM_WIDTH, borderRadius: 4 }}
+        resizeMode="cover"
+      />
       <View style={styles.textContainer}>
         <Text style={[theme.typography.body1, styles.title]} numberOfLines={1}>
           {item.title}
@@ -219,11 +221,7 @@ const getGridItemStyles = (theme: Theme, isDarkMode: boolean) =>
       shadowRadius: 12,
       // 그림자 (Android)
       elevation: 4,
-      overflow: "hidden",
-    },
-    image: {
-      width: "100%",
-      aspectRatio: 1,
+      // overflow: "hidden", // ❌ 제거: iOS shadow 표시를 위해
     },
     textContainer: {
       paddingVertical: 8,

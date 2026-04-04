@@ -13,7 +13,11 @@ const MusicStack = () => {
         component={MusicScreen}
         options={{ title: "Music", headerShown: false }}
       />
-      <Stack.Screen name="MusicList" component={MusicListScreen} />
+      <Stack.Screen
+        name="MusicList"
+        component={MusicListScreen}
+        options={{ title: "MusicList", headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
