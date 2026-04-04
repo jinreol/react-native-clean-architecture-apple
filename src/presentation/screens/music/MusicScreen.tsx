@@ -88,11 +88,7 @@ const GridItem = ({ item, theme, isDarkMode, onPress }: GridItemProps) => {
       onPress={() => onPress(item)} // 클릭 시 아이템 정보 전달
       style={styles.container}
     >
-      <Image
-        source={item.image}
-        style={{ width: ITEM_WIDTH, height: ITEM_WIDTH, borderRadius: 4 }}
-        resizeMode="cover"
-      />
+      <Image source={item.image} style={styles.image} resizeMode="cover" />
       <View style={styles.textContainer}>
         <Text style={[theme.typography.body1, styles.title]} numberOfLines={1}>
           {item.title}
@@ -223,6 +219,7 @@ const getGridItemStyles = (theme: Theme, isDarkMode: boolean) =>
       elevation: 4,
       // overflow: "hidden", // ❌ 제거: iOS shadow 표시를 위해
     },
+    image: { width: ITEM_WIDTH, height: ITEM_WIDTH, borderRadius: 4 },
     textContainer: {
       paddingVertical: 8,
       paddingHorizontal: 16,

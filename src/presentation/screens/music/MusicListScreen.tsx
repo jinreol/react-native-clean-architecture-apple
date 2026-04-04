@@ -1,4 +1,7 @@
 import { useAppTheme } from "@presentation/hooks/useAppTheme";
+import { MusicStackParamList } from "@presentation/navigation/types";
+import MusicListTopAppBar from "@presentation/screens/music/components/MusicListTopAppBar";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
   View,
   StyleSheet,
@@ -8,10 +11,13 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const MusicListScreen = () => {
+type Props = NativeStackScreenProps<MusicStackParamList, "MusicList">;
+
+const MusicListScreen = ({ navigation, route }: Props) => {
   const { theme } = useAppTheme();
   const { width } = useWindowDimensions();
   const insets = useSafeAreaInsets();
+  const { item } = route.params;
 
   return (
     <View
@@ -35,8 +41,29 @@ const MusicListScreen = () => {
         // stretch: 비율울 무시하고 영역에 딱 맞게 늘림 (비율 깨짐 주의)
         resizeMode="stretch"
       />
-      <Text>뮤직리스트화면</Text>
-      <Text>커스텀 테마</Text>
+      <Text>뮤직리스트화면: {item.title}</Text>
+      <Text>커스텀 테마: {item.artist}</Text>
+
+      {/* Top App Bar */}
+      <View
+        style={{
+          position: "absolute",
+          top: insets.top,
+          left: 0,
+          right: 0,
+          zIndex: 1,
+        }}
+      >
+        <MusicListTopAppBar
+          title={item.title}
+          artist={item.artist}
+          onPressArrowLeft={() => navigation.goBack()}
+          onPressMore={() => {
+            // TODO: More 아이콘 클릭 시 실행할 동작을 여기에 구현
+            console.log("More icon pressed");
+          }}
+        />
+      </View>
     </View>
   );
 };
