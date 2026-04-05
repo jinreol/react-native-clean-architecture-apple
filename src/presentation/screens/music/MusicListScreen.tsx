@@ -1,13 +1,19 @@
 import { useAppTheme } from "@presentation/hooks/useAppTheme";
 import { MusicStackParamList } from "@presentation/navigation/types";
+import MusicListHeader from "@presentation/screens/music/components/MusicListHeader";
+import MusicListItemView from "@presentation/screens/music/components/MusicListItemView";
+import MusicListSeparator from "@presentation/screens/music/components/MusicListSeparator";
 import MusicListTopAppBar from "@presentation/screens/music/components/MusicListTopAppBar";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 import {
   View,
   StyleSheet,
   Text,
   Image,
   useWindowDimensions,
+  ListRenderItem,
+  FlatList,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -18,6 +24,9 @@ const MusicListScreen = ({ navigation, route }: Props) => {
   const { width } = useWindowDimensions();
   const insets = useSafeAreaInsets();
   const { item } = route.params;
+  const renderItem: ListRenderItem<SongItem> = ({ item }) => (
+    <MusicListItemView width={width} item={item} />
+  );
 
   return (
     <View
@@ -29,20 +38,13 @@ const MusicListScreen = ({ navigation, route }: Props) => {
         },
       ]}
     >
-      <Image
-        style={{
-          width: width,
-          height: (width / 360) * 296,
-          // aspectRatio를 쓰면 안된다. 알 수 없는 빈공간이 생긴다.
-        }}
-        source={require("@assets/png/music_detail.png")}
-        // cover: 비율을 유지하면서 영역을 꽉 채움 (잘릴 수 있음)
-        // contain: 비율을 유지하면서 전체가 보이게 함
-        // stretch: 비율울 무시하고 영역에 딱 맞게 늘림 (비율 깨짐 주의)
-        resizeMode="stretch"
+      <FlatList
+        ListHeaderComponent={<MusicListHeader width={width} />}
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={(item: SongItem) => item.id}
+        ItemSeparatorComponent={() => <MusicListSeparator />}
       />
-      <Text>뮤직리스트화면: {item.title}</Text>
-      <Text>커스텀 테마: {item.artist}</Text>
 
       {/* Top App Bar */}
       <View
@@ -75,3 +77,73 @@ const styles = StyleSheet.create({
 });
 
 export default MusicListScreen;
+
+export interface SongItem {
+  id: string;
+  song: string;
+  album: string;
+  playTime: string;
+}
+
+const DATA: SongItem[] = [
+  {
+    id: "1",
+    song: "Talking to Myself",
+    album: "Crown the Empire",
+    playTime: "2:17",
+  },
+  {
+    id: "2",
+    song: "Shotgun",
+    album: "Crown the Empire",
+    playTime: "1:23",
+  },
+  {
+    id: "3",
+    song: "First",
+    album: "Crown the Empire",
+    playTime: "3:47",
+  },
+  {
+    id: "4",
+    song: "Talking to Myself",
+    album: "Crown the Empire",
+    playTime: "1:59",
+  },
+  {
+    id: "5",
+    song: "Shotgun",
+    album: "Crown the Empire",
+    playTime: "4:02",
+  },
+  {
+    id: "6",
+    song: "Talking to Myself",
+    album: "Crown the Empire",
+    playTime: "2:17",
+  },
+  {
+    id: "7",
+    song: "Shotgun",
+    album: "Crown the Empire",
+    playTime: "1:23",
+  },
+  {
+    id: "8",
+    song: "First",
+    album: "Crown the Empire",
+    playTime: "3:47",
+  },
+  {
+    id: "9",
+    song: "Talking to Myself",
+    album: "Crown the Empire",
+    playTime: "1:59",
+  },
+  {
+    id: "10",
+    song: "Shotgun",
+    album: "Crown the Empire",
+    playTime: "4:02",
+  },
+];
