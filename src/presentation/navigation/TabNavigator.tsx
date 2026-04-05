@@ -6,6 +6,11 @@ import AxiosScreen from "@presentation/screens/axios/AxiosScreen";
 import NewsScreen from "@presentation/screens/news/NewsScreen";
 import SettingsScreen from "@presentation/screens/settings/SettingsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import HomeIcon from "@assets/svg/ic_home_24.svg";
+import NewsIcon from "@assets/svg/ic_news_24.svg";
+import HeartIcon from "@assets/svg/ic_heart_24.svg";
+import MusicIcon from "@assets/svg/ic_music_24.svg";
+import SettingsIcon from "@assets/svg/ic_settings_24.svg";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -14,12 +19,40 @@ export const TabNavigator = () => {
 
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          if (route.name === "News") {
+            return (
+              <NewsIcon color={color} style={{ width: size, height: size }} />
+            );
+          } else if (route.name === "MusicStack") {
+            return (
+              <MusicIcon color={color} style={{ width: size, height: size }} />
+            );
+          } else if (route.name === "CssStack") {
+            return (
+              <HomeIcon color={color} style={{ width: size, height: size }} />
+            );
+          } else if (route.name === "Axios") {
+            return (
+              <HeartIcon color={color} style={{ width: size, height: size }} />
+            );
+          } else if (route.name === "Settings") {
+            return (
+              <SettingsIcon
+                color={color}
+                style={{ width: size, height: size }}
+              />
+            );
+          }
+        },
         tabBarStyle: { backgroundColor: theme.color.background },
-        tabBarActiveTintColor: theme.color.accent,
+        tabBarActiveTintColor: theme.color.secondary,
+        tabBarInactiveTintColor: theme.color.icon,
+        tabBarLabelStyle: theme.typography.caption,
         headerStyle: { backgroundColor: theme.color.background },
         headerTitleStyle: { color: theme.color.main },
-      }}
+      })}
     >
       <Tab.Screen
         name="News"
