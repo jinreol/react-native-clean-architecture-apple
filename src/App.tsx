@@ -3,9 +3,10 @@ import { useAppInitializer } from "@presentation/hooks/useAppInitializer";
 import { TabNavigator } from "@presentation/navigation/TabNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Text } from "react-native";
 
 const App = () => {
-  const { isReady, onLayoutRootView } = useAppInitializer();
+  const { isReady, onLayoutRootView, linking } = useAppInitializer();
 
   if (!isReady) {
     return null;
@@ -14,7 +15,10 @@ const App = () => {
   return (
     <SafeAreaProvider onLayout={onLayoutRootView}>
       <DIProvider>
-        <NavigationContainer>
+        <NavigationContainer
+          linking={linking}
+          fallback={<Text>Loading...</Text>}
+        >
           <TabNavigator />
         </NavigationContainer>
       </DIProvider>

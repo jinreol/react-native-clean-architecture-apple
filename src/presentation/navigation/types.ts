@@ -6,7 +6,7 @@ export type RootTabParamList = {
   MusicStack: undefined;
   CssStack: undefined;
   Axios: undefined;
-  Settings: undefined;
+  Deeplink: { id?: string };
 };
 
 export type CssStackParamList = {

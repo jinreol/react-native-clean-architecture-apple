@@ -4,7 +4,7 @@ import MusicStack from "@presentation/navigation/MusicStack";
 import { RootTabParamList } from "@presentation/navigation/types";
 import AxiosScreen from "@presentation/screens/axios/AxiosScreen";
 import NewsScreen from "@presentation/screens/news/NewsScreen";
-import SettingsScreen from "@presentation/screens/settings/SettingsScreen";
+import DeeplinkScreen from "@presentation/screens/deeplink/DeeplinkScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeIcon from "@assets/svg/ic_home_24.svg";
 import NewsIcon from "@assets/svg/ic_news_24.svg";
@@ -37,7 +37,7 @@ export const TabNavigator = () => {
             return (
               <HeartIcon color={color} style={{ width: size, height: size }} />
             );
-          } else if (route.name === "Settings") {
+          } else if (route.name === "Deeplink") {
             return (
               <SettingsIcon
                 color={color}
@@ -70,7 +70,7 @@ export const TabNavigator = () => {
         options={{ title: "Css", headerShown: false }}
       />
       <Tab.Screen name="Axios" component={AxiosScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name="Deeplink" component={DeeplinkScreen} />
     </Tab.Navigator>
   );
 };

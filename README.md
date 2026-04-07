@@ -145,3 +145,106 @@ declare module "*.svg" {
   export default content;
 }
 ```
+
+### Deeplik
+
+- Deeplink 설정
+
+```tsx
+// 2. 팀링크 수정 (Linking Configuration)
+const prefix = createURL("/");
+const linking: LinkingOptions<RootTabParamList> = {
+  prefixes: [prefix, "https://app.example.com"], // Expo 스킵과 웹 도메인 모두 허용
+  config: {
+    screens: {
+      News: "home",
+      MusicStack: "musicStack",
+      CssStack: "cssStack",
+      Axios: "axios",
+      Deeplink: {
+        path: "page", // https://app.example.com/page?id=123 형태 대응
+      },
+    },
+  },
+};
+```
+
+- app.json
+
+```json
+{
+  "expo": {
+    "name": "clean-architecture-apple",
+    "slug": "clean-architecture-apple",
+    "version": "1.0.0",
+    "scheme": "myapp", // 여기서 설정한 이름이 myapp:// 형태의 스킴이 됩니다.
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./src/assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "bundleIdentifier": "com.example.myapp", // Deeplink
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.example.myapp", // Deeplink
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "@assets/favicon.png"
+    },
+    "plugins": ["expo-font"]
+  }
+}
+```
+
+- Deeplink 받는 부분
+
+```tsx
+import { useAppTheme } from "@presentation/hooks/useAppTheme";
+import { View, StyleSheet, Text } from "react-native";
+
+const DeeplinkScreen = ({ route }: any) => {
+  const { theme } = useAppTheme();
+  const { id } = route.params || {};
+
+  return (
+    <View
+      style={[styles.container, { backgroundColor: theme.color.background }]}
+    >
+      <Text style={[theme.typography.body1, { color: theme.color.primary }]}>
+        Deeplink
+      </Text>
+      <Text style={[theme.typography.body2, { color: theme.color.secondary }]}>
+        ID: {id ? id : "데이터 없음"}
+      </Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 16 },
+});
+
+export default DeeplinkScreen;
+```
+
+- ios
+
+```terminal
+xcrun simctl openurl booted "exp://127.0.0.1:8081/--/page?id=123"
+```
+
+- android
+
+```terminal
+adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:8081/--/page?id=123"
+```

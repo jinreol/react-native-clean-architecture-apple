@@ -3,6 +3,7 @@
     "name": "clean-architecture-apple",
     "slug": "clean-architecture-apple",
     "version": "1.0.0",
+    "scheme": "myapp", // 여기서 설정한 이름이 myapp:// 형태의 스킴이 됩니다.
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -12,9 +13,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "bundleIdentifier": "com.example.myapp",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.example.myapp",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
