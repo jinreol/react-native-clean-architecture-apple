@@ -7,6 +7,7 @@ export type RootTabParamList = {
   CssStack: undefined;
   Axios: undefined;
   Deeplink: { id?: string };
+  WebView: undefined;
 };
 
 export type CssStackParamList = {

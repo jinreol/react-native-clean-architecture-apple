@@ -11,6 +11,8 @@ import NewsIcon from "@assets/svg/ic_news_24.svg";
 import HeartIcon from "@assets/svg/ic_heart_24.svg";
 import MusicIcon from "@assets/svg/ic_music_24.svg";
 import SettingsIcon from "@assets/svg/ic_settings_24.svg";
+import WebIcon from "@assets/svg/ic_web_24.svg";
+import WebViewScreen from "@presentation/screens/webview/WebViewScreen";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -44,6 +46,10 @@ export const TabNavigator = () => {
                 style={{ width: size, height: size }}
               />
             );
+          } else if (route.name === "WebView") {
+            return (
+              <WebIcon color={color} style={{ width: size, height: size }} />
+            );
           }
         },
         tabBarStyle: { backgroundColor: theme.color.background },
@@ -71,6 +77,7 @@ export const TabNavigator = () => {
       />
       <Tab.Screen name="Axios" component={AxiosScreen} />
       <Tab.Screen name="Deeplink" component={DeeplinkScreen} />
+      <Tab.Screen name="WebView" component={WebViewScreen} />
     </Tab.Navigator>
   );
 };
