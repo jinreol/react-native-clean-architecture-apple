@@ -2,7 +2,7 @@ import { CssProp } from "@presentation/navigation/types";
 import { Button, ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const HomeScreen = ({ navigation }: CssProp) => {
+const CssScreen = ({ navigation }: CssProp) => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -62,4 +62,4 @@ const HomeScreen = ({ navigation }: CssProp) => {
   );
 };
 
-export default HomeScreen;
+export default CssScreen;

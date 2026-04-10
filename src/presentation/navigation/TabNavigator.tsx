@@ -1,5 +1,5 @@
 import { useAppTheme } from "@presentation/hooks/useAppTheme";
-import CssStack from "@presentation/navigation/CssStack";
+// import CssStack from "@presentation/navigation/CssStack";
 import MusicStack from "@presentation/navigation/MusicStack";
 import { RootTabParamList } from "@presentation/navigation/types";
 import AxiosScreen from "@presentation/screens/axios/AxiosScreen";
@@ -13,6 +13,7 @@ import MusicIcon from "@assets/svg/ic_music_24.svg";
 import SettingsIcon from "@assets/svg/ic_settings_24.svg";
 import WebIcon from "@assets/svg/ic_web_24.svg";
 import WebViewScreen from "@presentation/screens/webview/WebViewScreen";
+import HomeScreen from "@presentation/screens/home/HomeScreen";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -31,7 +32,13 @@ export const TabNavigator = () => {
             return (
               <MusicIcon color={color} style={{ width: size, height: size }} />
             );
-          } else if (route.name === "CssStack") {
+          }
+          // else if (route.name === "CssStack") {
+          //   return (
+          //     <HomeIcon color={color} style={{ width: size, height: size }} />
+          //   );
+          // }
+          else if (route.name == "Home") {
             return (
               <HomeIcon color={color} style={{ width: size, height: size }} />
             );
@@ -61,6 +68,11 @@ export const TabNavigator = () => {
       })}
     >
       <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ title: "Home" }}
+      />
+      <Tab.Screen
         name="News"
         component={NewsScreen}
         options={{ title: "News", headerShown: false }}
@@ -70,11 +82,11 @@ export const TabNavigator = () => {
         component={MusicStack}
         options={{ title: "Music", headerShown: false }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="CssStack"
         component={CssStack}
         options={{ title: "Css", headerShown: false }}
-      />
+      /> */}
       <Tab.Screen name="Axios" component={AxiosScreen} />
       <Tab.Screen name="Deeplink" component={DeeplinkScreen} />
       <Tab.Screen name="WebView" component={WebViewScreen} />

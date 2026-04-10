@@ -2,9 +2,10 @@ import { AlbumItem } from "@presentation/screens/music/MusicScreen";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type RootTabParamList = {
+  Home: undefined;
   News: undefined;
   MusicStack: undefined;
-  CssStack: undefined;
+  // CssStack: undefined;
   Axios: undefined;
   Deeplink: { id?: string };
   WebView: undefined;

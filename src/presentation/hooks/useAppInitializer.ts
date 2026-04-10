@@ -38,9 +38,9 @@ export const useAppInitializer = () => {
     prefixes: [prefix, "https://app.example.com"], // Expo 스킵과 웹 도메인 모두 허용
     config: {
       screens: {
-        News: "home",
+        News: "news",
         MusicStack: "musicStack",
-        CssStack: "cssStack",
+        // CssStack: "cssStack",
         Axios: "axios",
         Deeplink: {
           path: "page", // https://app.example.com/page?id=123 형태 대응

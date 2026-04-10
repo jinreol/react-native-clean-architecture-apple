@@ -13,7 +13,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator<CssStackParamList>();
 
-const HomeStack = () => {
+const CssStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Css" component={CssScreen} />
@@ -45,4 +45,4 @@ const HomeStack = () => {
   );
 };
 
-export default HomeStack;
+export default CssStack;

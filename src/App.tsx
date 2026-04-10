@@ -4,6 +4,7 @@ import { TabNavigator } from "@presentation/navigation/TabNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Text } from "react-native";
+import { AuthProvider } from "@presentation/hooks/useAuth";
 
 const App = () => {
   const { isReady, onLayoutRootView, linking } = useAppInitializer();
@@ -15,12 +16,14 @@ const App = () => {
   return (
     <SafeAreaProvider onLayout={onLayoutRootView}>
       <DIProvider>
-        <NavigationContainer
-          linking={linking}
-          fallback={<Text>Loading...</Text>}
-        >
-          <TabNavigator />
-        </NavigationContainer>
+        <AuthProvider>
+          <NavigationContainer
+            linking={linking}
+            fallback={<Text>Loading...</Text>}
+          >
+            <TabNavigator />
+          </NavigationContainer>
+        </AuthProvider>
       </DIProvider>
     </SafeAreaProvider>
   );
